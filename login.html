@@ -16,25 +16,25 @@
                 <img src="/images/logo.png" alt="홈으로">
             </a>
         </div>
-        <div class="input-box-wrap">
+        <form class="input-box-wrap">
             <div class="input-box">
                 <label for="login-email">
                     이메일
                 </label>
-                <input type="email" name="login-email" placeholder="이메일을 입력해주세요">
+                <input type="email" id="login-email" name="login-email" placeholder="이메일을 입력해주세요">
             </div>
             <div class="input-box">
                 <label for="login-password">
                     비밀번호
                 </label>
                 <div class="password-wrap">
-                    <input type="password" name="login-password" class="password" placeholder="비밀번호를 입력해주세요">
-                    <i class="hide" onclick="">
+                    <input type="password" id="login-password" name="login-password" class="password" placeholder="비밀번호를 입력해주세요">
+                    <span class="hide" onclick="">
                         <img src="images/btn_visibility_off.svg" alt="비밀번호 가리기">
-                    </i>
+                    </span>
                 </div>
             </div>
-            <button type="button" onclick="location.href='/login.html'" class="btn-login-disabled">
+            <button type="submit" onclick="location.href='/login.html'" class="btn-login-disabled">
                 로그인
             </button>
             <div class="login-sns">
@@ -53,7 +53,7 @@
             <p class="move-register">
                 판다마켓이 처음이신가요? <a href="/signup.html">회원가입</a>
             </p>
-        </div> 
+        </form> 
     </div>
 </body>
 </html>

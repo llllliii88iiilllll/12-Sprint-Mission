@@ -16,25 +16,25 @@
                 <img src="/images/logo.png" alt="홈으로">
             </a>
         </div>
-        <div class="input-box-wrap">
+        <form class="input-box-wrap">
             <div class="input-box">
                 <label for="signup-email">
                     이메일
                 </label>
-                <input type="email" name="signup-email" placeholder="이메일을 입력해주세요">
+                <input type="email" id="signup-email" name="signup-email" placeholder="이메일을 입력해주세요">
             </div>
             <div class="input-box">
                 <label for="signup-nickname">
                     닉네임
                 </label>
-                <input type="text" name="signup-nickname" placeholder="닉네임을 입력해주세요">
+                <input type="text" id="signup-nickname" name="signup-nickname" placeholder="닉네임을 입력해주세요">
             </div>
             <div class="input-box">
                 <label for="signup-password">
                     비밀번호
                 </label>
                 <div class="password-wrap">
-                    <input type="password" name="signup-password" class="password" placeholder="비밀번호를 입력해주세요">
+                    <input type="password" id="signup-password" name="signup-password" class="password" placeholder="비밀번호를 입력해주세요">
                     <i class="hide" onclick="">
                         <img src="/images/btn_visibility_off.svg" alt="비밀번호 가리기">
                     </i>
@@ -45,13 +45,13 @@
                     비밀번호 확인
                 </label>
                 <div class="password-wrap">
-                    <input type="text" name="signup-password-confirm" class="password" placeholder="비밀번호를 다시 입력해주세요">
+                    <input type="text" id="signup-password-confirm" name="signup-password-confirm" class="password" placeholder="비밀번호를 다시 입력해주세요">
                     <i class="hide" onclick="">
                         <img src="/images/btn_visibility_on.svg" alt="비밀번호 보이기">
                     </i>
                 </div>
             </div>
-            <button type="button" onclick="" location.href='/login.html'" class="btn-login-disabled">
+            <button type="submit" onclick="" location.href='/login.html'" class="btn-login-disabled">
                 로그인
             </button>
             <div class="login-sns">
@@ -70,7 +70,7 @@
             <p class="move-register">
                 판다마켓이 처음이신가요? <a href="/signup.html">회원가입</a>
             </p>
-        </div> 
+        </form> 
     </div>
 </body>
 </html>
