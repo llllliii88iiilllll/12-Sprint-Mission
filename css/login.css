@@ -57,18 +57,29 @@
 .input-box input::placeholder {
     color: var(--gray-scale-400);
 }
+.input-box input.error-border {
+    border: 1px solid var(--error);
+}
+.error-txt {
+    padding-left: 16px;
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    line-height: 24px;
+    color: var(--error);
+}
 .password-wrap {
     display: grid;
     align-items: center;
     position: relative;
 }
-.hide {
+.hide, .show {
     position: absolute;
     right: 16px;
     height: 24px;
+    background: none;
     cursor: pointer;
 }
-.btn-login-disabled {
+.submit-btn {
     padding: 16px 0;
     border: none;
     border-radius: 40px;
@@ -77,11 +88,21 @@
     font-weight: var(--font-weight-semibold);
     line-height: 32px;
     color: var(--gray-scale-0);
+    cursor: inherit;
+}
+.submit-btn.abled {
+    background-color: var(--primary-color-100);
     cursor: pointer;
 }
-.btn-login-able {
-    background-color: var(--main-bg-color );
+.submit-btn.abled:hover {
+    background-color: var(--primary-color-200);
 }
+.submit-btn.abled:active {
+    background-color: var(--primary-color-300);
+}
+/* .btn-login-able {
+    background-color: var(--main-bg-color);
+} */
 .login-sns {
     display: flex;
     justify-content: space-between;

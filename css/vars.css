@@ -3,7 +3,9 @@
     --primary-color-100: #3692FF;
     --primary-color-200: #1967d6;
     --primary-color-300: #1251aa;
+
     --main-bg-color-light: #E6F2FF;
+
     --gray-scale-900: #111827;
     --gray-scale-800: #1f2937;
     --gray-scale-700: #374151;
@@ -16,6 +18,8 @@
     --gray-scale-100: #f3f4f6;
     --gray-scale-50: #f9fafb;
     --gray-scale-0: #ffffff;
+
+    --error: #F74747;
 
     /* font-weight */
     --font-weight-light: 200;

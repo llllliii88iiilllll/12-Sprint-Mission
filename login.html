@@ -15,7 +15,7 @@
                 <img src="/images/logo.svg" alt="홈으로">
             </a>
         </div>
-        <form class="input-box-wrap">
+        <form id="login-form" class="input-box-wrap" onsubmit="">
             <div class="input-box">
                 <label for="login-email">
                     이메일
@@ -28,12 +28,12 @@
                 </label>
                 <div class="password-wrap">
                     <input type="password" id="login-password" name="login-password" class="password" placeholder="비밀번호를 입력해주세요">
-                    <button class="hide" type="button">
-                        <img src="images/btn_visibility_off.svg" alt="비밀번호 가리기">
+                    <button id="viewToggle" class="hide" type="button">
+                        <img src="images/btn_visibility_off.svg" alt="비밀번호 가리기" class="toggle-img">
                     </button>
                 </div>
             </div>
-            <button type="submit" onclick="location.href='/login.html'" class="btn-login-disabled">
+            <button type="button" class="submit-btn" onclick="goItems()" disabled> 
                 로그인
             </button>
             <div class="login-sns">
@@ -55,4 +55,5 @@
         </form> 
     </div>
 </body>
+<script src="js/login.js"></script>
 </html>

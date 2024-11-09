@@ -34,24 +34,24 @@
                 </label>
                 <div class="password-wrap">
                     <input type="password" id="signup-password" name="signup-password" class="password" placeholder="비밀번호를 입력해주세요">
-                    <button class="hide" type="button">
-                        <img src="/images/btn_visibility_off.svg" alt="비밀번호 가리기">
+                    <button id="viewToggle" class="hide" type="button">
+                        <img src="/images/btn_visibility_off.svg" alt="비밀번호 가리기" class="toggle-img">
                     </button>
                 </div>
             </div>
             <div class="input-box">
-                <label for="signup-password-confirm">
+                <label for="signup-password-rewrite">
                     비밀번호 확인
                 </label>
                 <div class="password-wrap">
-                    <input type="text" id="signup-password-confirm" name="signup-password-confirm" class="password" placeholder="비밀번호를 다시 입력해주세요">
-                    <button class="hide" type="button">
-                        <img src="/images/btn_visibility_on.svg" alt="비밀번호 보이기">
+                    <input type="password" id="signup-password-rewrite" name="signup-password-rewrite" class="password" placeholder="비밀번호를 다시 입력해주세요">
+                    <button  id="viewToggle" class="hide" type="button">
+                        <img src="/images/btn_visibility_off.svg" alt="비밀번호 가리기" class="toggle-img">
                     </button>
                 </div>
             </div>
-            <button type="submit" onclick="" location.href='/login.html' class="btn-login-disabled">
-                로그인
+            <button type="button" onclick="goSignin()" class="submit-btn" disabled>
+                회원가입
             </button>
             <div class="login-sns">
                 <p>
@@ -72,4 +72,5 @@
         </form> 
     </div>
 </body>
+<script src="/js/signup.js"></script>
 </html>
