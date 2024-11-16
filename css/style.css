@@ -1,6 +1,7 @@
 /* common css file */
 @import url(vars.css);
 @import url(login.css);
+@import url(items.css);
 
 /* common settings */
 * { 
@@ -17,6 +18,17 @@ a {
 
 button {
     border: 0;
+}
+
+li {
+    list-style: none;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration{
+    opacity: 0;
 }
 
 .wrap { 
@@ -72,6 +84,20 @@ nav {
 }
 .btn-login:active {
     background-color: var(--primary-color-300);
+}
+.sub-menu {
+    display: flex;
+    width: 100%;
+    margin: 0 50px;
+    gap: 35px;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--gray-scale-600);
+    font-weight: var(--font-weight-bold);
+}
+.sub-menu .active {
+    color: var(--primary-color-100);
+    font-weight: var(--font-weight-bold);
 }
 
 
