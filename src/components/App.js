@@ -6,20 +6,22 @@ import "./BestList.css";
 import { getItems } from "../api";
 import BestList from "./BestList";
 import TotalListItem from "./TotalList";
+import useWindowSize from "./useWindowSize";
 
 function App() {
   const [order, setOrder] = useState("recent");
-  const [page, setPage] = useState(4);
   const [items, setItems] = useState([]);
+  const { width } = useWindowSize();
+  const [pageSize, setPageSize] = useState(4);
+  const [fullPageSize, setFullPageSize] = useState(10);
 
   const [totalCount, setTotalCount] = useState(0);
-  const pageRange = 10;
   const btnRange = 5;
   const [fullPage, setFullPage] = useState(1);
   const [fullItems, setFullItems] = useState([]);
   const currentSet = Math.ceil(fullPage / btnRange);
   const startPage = (currentSet - 1) * btnRange + 1;
-  const totalPage = Math.ceil(totalCount / pageRange);
+  const totalPage = Math.ceil(totalCount / fullPageSize);
   const endPage = Math.min(startPage + btnRange - 1, totalPage);
 
   const selectRef = useRef(null);
@@ -43,7 +45,7 @@ function App() {
   };
 
   const handleLoad = async () => {
-    const options = { orderBy: "favorite", pageSize: page };
+    const options = { orderBy: "favorite", pageSize: pageSize };
     const { list } = await getItems(options);
     setItems(list);
   };
@@ -51,10 +53,10 @@ function App() {
   const handleLoadFull = async (options) => {
     const fullOptions = {
       orderBy: order,
-      pageSize: pageRange,
+      pageSize: fullPageSize,
       keyword: keyword,
-      offset: (fullPage - 1) * pageRange,
-      limit: pageRange,
+      offset: (fullPage - 1) * fullPageSize,
+      limit: fullPageSize,
       page: fullPage,
     };
     const { list, totalCount } = await getItems(fullOptions);
@@ -74,11 +76,24 @@ function App() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [order, selectRef]);
+  }, [order, selectRef, pageSize]);
+
+  useEffect(() => {
+    if (width >= 1024) {
+      setFullPageSize(10);
+      setPageSize(4);
+    } else if (width >= 768) {
+      setFullPageSize(6);
+      setPageSize(2);
+    } else {
+      setFullPageSize(4);
+      setPageSize(1);
+    }
+  }, [width]);
 
   useEffect(() => {
     handleLoadFull();
-  }, [fullPage, order, keyword]);
+  }, [fullPage, order, keyword, fullPageSize]);
 
   return (
     <>
