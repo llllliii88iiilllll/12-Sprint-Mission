@@ -1,0 +1,3 @@
+const Pagination = () => {
+  const pageNumbers = [];
+};
