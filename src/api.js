@@ -4,11 +4,15 @@ export async function getItems({
   keyword = "",
   offset = 0,
   limit = 10,
+  page = 1,
 }) {
-  const query = `orderBy=${orderBy}&pageSize=${pageSize}&keyword=${keyword}&offset=${offset}&limit=${limit}`;
+  const query = `page=${page}&orderBy=${orderBy}&pageSize=${pageSize}&keyword=${keyword}&offset=${offset}&limit=${limit}`;
   const response = await fetch(
     `https://panda-market-api.vercel.app/products?${query}`
   );
   const body = await response.json();
-  return body;
+  return {
+    list: body.list,
+    totalCount: body.totalCount,
+  };
 }

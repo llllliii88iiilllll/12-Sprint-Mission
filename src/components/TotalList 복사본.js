@@ -17,4 +17,18 @@ function TotalListItem({ item }) {
   );
 }
 
-export default TotalListItem;
+function TotalList({ items }) {
+  return (
+    <ul className="product-list-wrap">
+      {items.map((item) => {
+        return (
+          <li className="product-list total" key={item.id}>
+            <TotalListItem item={item} />
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+export default TotalList;

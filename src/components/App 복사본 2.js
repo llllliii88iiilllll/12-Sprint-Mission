@@ -10,17 +10,8 @@ import TotalListItem from "./TotalList";
 function App() {
   const [order, setOrder] = useState("recent");
   const [page, setPage] = useState(4);
-  const [items, setItems] = useState([]);
-
-  const [totalCount, setTotalCount] = useState(0);
-  const pageRange = 10;
-  const btnRange = 5;
-  const [fullPage, setFullPage] = useState(1);
+  const [fullPage, setFullPage] = useState(10);
   const [fullItems, setFullItems] = useState([]);
-  const currentSet = Math.ceil(fullPage / btnRange);
-  const startPage = (currentSet - 1) * btnRange + 1;
-  const totalPage = Math.ceil(totalCount / pageRange);
-  const endPage = Math.min(startPage + btnRange - 1, totalPage);
 
   const selectRef = useRef(null);
   const [currentValue, setCurrentValue] = useState("최신순");
@@ -51,15 +42,11 @@ function App() {
   const handleLoadFull = async (options) => {
     const fullOptions = {
       orderBy: order,
-      pageSize: pageRange,
+      pageSize: fullPage,
       keyword: keyword,
-      offset: (fullPage - 1) * pageRange,
-      limit: pageRange,
-      page: fullPage,
     };
-    const { list, totalCount } = await getItems(fullOptions);
+    const { list } = await getItems(fullOptions);
     setFullItems(list);
-    setTotalCount(totalCount);
   };
 
   useEffect(() => {
@@ -77,8 +64,8 @@ function App() {
   }, [order, selectRef]);
 
   useEffect(() => {
-    handleLoadFull();
-  }, [fullPage, order, keyword]);
+    handleLoadFull({ order, limit: 10 });
+  }, [page, order, keyword]);
 
   return (
     <>
@@ -138,28 +125,6 @@ function App() {
               );
             })}
           </ul>
-          <ol className="pagination">
-            {currentSet > 1 && (
-              <li className="btn-prev">
-                <a onClick={() => setFullPage(startPage - 1)}></a>
-              </li>
-            )}
-            {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
-              <li key={i}>
-                <a
-                  onClick={() => setFullPage(startPage + i)}
-                  className={fullPage === startPage + i ? "active" : ""}
-                >
-                  {startPage + i}
-                </a>
-              </li>
-            ))}
-            {currentSet < Math.ceil(totalPage / btnRange) && (
-              <li className="btn-next">
-                <a onClick={() => setFullPage(endPage + 1)}></a>
-              </li>
-            )}
-          </ol>
         </article>
       </ContentWrap>
     </>
