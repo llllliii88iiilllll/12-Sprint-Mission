@@ -1,37 +1,69 @@
-import "./BestList.css";
+import styled from "styled-components";
+import {
+  ListWrapUl,
+  ItemTxtWrap,
+  ItemTitle,
+  ItemPrice,
+  FavoriteWrap,
+  FavoriteImg,
+  FavoriteCount,
+} from "../utils/listTxtStyle";
 import heartImg from "../assets/ic_heart.svg";
 import SectionTitle from "./SectionTitle";
+
+const BestListWrap = styled.article`
+  margin-bottom: 40px;
+`;
+
+const BestListLi = styled.li`
+  @media (max-width: 1199px) {
+    width: 49%;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+`;
+
+const BestListImg = styled.img`
+  border-radius: 16px;
+  width: 282px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  @media (max-width: 1199px) {
+    width: 100%;
+  }
+`;
 
 function BestListItem({ item }) {
   return (
     <>
-      <img src={item.images} alt="상품이미지" />
-      <div className="txt-area">
-        <p className="product-title">{item.name}</p>
-        <p className="product-price">{item.price}원</p>
-        <div className="btn-like">
-          <img src={heartImg} alt="찜 아이콘" />
-          <span className="like-count">{item.favoriteCount}</span>
-        </div>
-      </div>
+      <BestListImg src={item.images} alt="상품이미지" />
+      <ItemTxtWrap>
+        <ItemTitle>{item.name}</ItemTitle>
+        <ItemPrice>{item.price}원</ItemPrice>
+        <FavoriteWrap>
+          <FavoriteImg src={heartImg} alt="찜 아이콘" />
+          <FavoriteCount>{item.favoriteCount}</FavoriteCount>
+        </FavoriteWrap>
+      </ItemTxtWrap>
     </>
   );
 }
 
 function BestList({ items }) {
   return (
-    <article className="best-product">
+    <BestListWrap>
       <SectionTitle>베스트 상품</SectionTitle>
-      <ul className="product-list-wrap">
+      <ListWrapUl>
         {items.map((item) => {
           return (
-            <li className="product-list" key={item.id}>
+            <BestListLi key={item.id}>
               <BestListItem item={item} />
-            </li>
+            </BestListLi>
           );
         })}
-      </ul>
-    </article>
+      </ListWrapUl>
+    </BestListWrap>
   );
 }
 

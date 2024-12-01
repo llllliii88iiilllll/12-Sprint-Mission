@@ -53,12 +53,3 @@
     width: 49%;
   }
 }
-.product-list.total > img {
-  width: 221px;
-  height: 221px;
-  display: inline-block;
-  @media (max-width: 1199px) {
-    width: 100%;
-    height: auto;
-  }
-}
