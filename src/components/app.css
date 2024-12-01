@@ -55,6 +55,7 @@
   grid-area: sort;
   display: flex;
   position: relative;
+  justify-content: flex-end;
 }
 .btn-sort {
   width: 130px;
@@ -68,6 +69,11 @@
   appearance: none;
   background: url(../assets/ic_arrow_down.svg) no-repeat right 12px center;
   align-content: center;
+}
+.btn-sort.icon {
+  width: 42px;
+  padding: 9px;
+  background-image: none;
 }
 .sort-list {
   position: absolute;

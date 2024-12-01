@@ -7,13 +7,17 @@ import { getItems } from "../api";
 import BestList from "./BestList";
 import TotalListItem from "./TotalList";
 import useWindowSize from "./useWindowSize";
+import sortIcon from "../assets/ic_sort.svg";
 
 function App() {
   const [order, setOrder] = useState("recent");
   const [items, setItems] = useState([]);
   const { width } = useWindowSize();
-  const [pageSize, setPageSize] = useState(4);
-  const [fullPageSize, setFullPageSize] = useState(10);
+
+  const initialPageSize = width >= 1200 ? 4 : width >= 768 ? 2 : 1;
+  const initialFullPageSize = width >= 1200 ? 10 : width >= 768 ? 6 : 4;
+  const [pageSize, setPageSize] = useState(initialPageSize);
+  const [fullPageSize, setFullPageSize] = useState(initialFullPageSize);
 
   const [totalCount, setTotalCount] = useState(0);
   const btnRange = 5;
@@ -65,7 +69,10 @@ function App() {
   };
 
   useEffect(() => {
-    handleLoad();
+    if (pageSize > 0) {
+      handleLoad();
+    }
+
     function handleClickOutside(event) {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
         setShowOptions(false);
@@ -79,7 +86,7 @@ function App() {
   }, [order, selectRef, pageSize]);
 
   useEffect(() => {
-    if (width >= 1024) {
+    if (width >= 1200) {
       setFullPageSize(10);
       setPageSize(4);
     } else if (width >= 768) {
@@ -92,7 +99,9 @@ function App() {
   }, [width]);
 
   useEffect(() => {
-    handleLoadFull();
+    if (fullPageSize > 0) {
+      handleLoadFull();
+    }
   }, [fullPage, order, keyword, fullPageSize]);
 
   return (
@@ -121,7 +130,14 @@ function App() {
               }}
               ref={selectRef}
             >
-              <label className="btn-sort">{currentValue}</label>
+              {width >= 768 && (
+                <label className="btn-sort">{currentValue}</label>
+              )}
+              {width < 768 && (
+                <label className="btn-sort icon">
+                  <img src={sortIcon} alt="정렬하기" />
+                </label>
+              )}
               {showOptions && (
                 <ul class="sort-list">
                   <li
