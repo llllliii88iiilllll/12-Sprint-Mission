@@ -70,8 +70,6 @@ function Items() {
       orderBy: order,
       pageSize: fullPageSize,
       keyword: keyword,
-      //offset: (fullPage - 1) * fullPageSize,
-      //limit: fullPageSize,
       page: fullPage,
     };
     const { list, totalCount } = await getItems(fullOptions);
