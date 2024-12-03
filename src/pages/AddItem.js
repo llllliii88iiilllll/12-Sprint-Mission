@@ -135,22 +135,23 @@ function AddItem() {
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
-  useEffect(() => {
-    const { title, content, price } = values;
-    const isValid =
-      title.trim() !== "" &&
-      content.trim() !== "" &&
-      price > 0 &&
-      tags.length > 0;
-    setIsButtonEnabled(isValid);
-  }, [values, tags]);
+  const isValid = (values, tags) => {
+    return (
+      values.title.trim() !== "" &&
+      values.content.trim() !== "" &&
+      values.price > 0 &&
+      tags.length > 0
+    );
+  };
+
+  useEffect(() => {}, [values, tags]);
 
   return (
     <>
       <AddForm id="submitForm" onSubmit={handleSubmit}>
         <FormTopSection>
           <SectionTitle>상품 등록하기</SectionTitle>
-          <SubmitButton type="submit" disabled={!isButtonEnabled}>
+          <SubmitButton type="submit" disabled={!isValid(values, tags)}>
             등록
           </SubmitButton>
         </FormTopSection>
