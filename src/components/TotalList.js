@@ -1,3 +1,4 @@
+import heartImg from "../assets/ic_heart.svg";
 import styled from "styled-components";
 import {
   ListWrapUl,
@@ -8,7 +9,7 @@ import {
   FavoriteImg,
   FavoriteCount,
 } from "../utils/listTxtStyle";
-import heartImg from "../assets/ic_heart.svg";
+import { Link } from "react-router-dom";
 
 const TotalListLi = styled.li`
   width: 221px;
@@ -54,9 +55,11 @@ function TotalList({ fullItems }) {
     <ListWrapUl>
       {fullItems.map((fullItem) => {
         return (
-          <TotalListLi key={fullItem.id}>
-            <TotalListItem item={fullItem} />
-          </TotalListLi>
+          <Link to={`/items/${fullItem.id}`}>
+            <TotalListLi key={fullItem.id}>
+              <TotalListItem item={fullItem} />
+            </TotalListLi>
+          </Link>
         );
       })}
     </ListWrapUl>

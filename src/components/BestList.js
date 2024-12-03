@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
   ListWrapUl,
@@ -57,9 +58,11 @@ function BestList({ items }) {
       <ListWrapUl>
         {items.map((item) => {
           return (
-            <BestListLi key={item.id}>
-              <BestListItem item={item} />
-            </BestListLi>
+            <Link to={`/items/${item.id}`}>
+              <BestListLi key={item.id}>
+                <BestListItem item={item} />
+              </BestListLi>
+            </Link>
           );
         })}
       </ListWrapUl>
