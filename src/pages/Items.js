@@ -78,9 +78,7 @@ function Items() {
   };
 
   useEffect(() => {
-    if (pageSize > 0) {
-      handleLoad();
-    }
+    handleLoad();
   }, [pageSize]);
 
   useEffect(() => {
@@ -97,9 +95,7 @@ function Items() {
   }, [width]);
 
   useEffect(() => {
-    if (fullPageSize > 0) {
-      handleLoadFull();
-    }
+    handleLoadFull();
   }, [fullPage, order, keyword, fullPageSize]);
 
   return (
