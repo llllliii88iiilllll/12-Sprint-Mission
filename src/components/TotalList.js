@@ -1,4 +1,3 @@
-import "./TotalList.css";
 import styled from "styled-components";
 import {
   ListWrapUl,
