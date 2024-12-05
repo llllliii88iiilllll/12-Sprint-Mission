@@ -35,6 +35,12 @@ const AddItem = styled.button`
   font-weight: var(--font-weight-semibold);
   color: var(--gray-scale-0);
   align-content: center;
+  &:hover {
+    background-color: var(--primary-color-200);
+  }
+  &:active {
+    background-color: var(--primary-color-300);
+  }
 `;
 
 function Items() {
