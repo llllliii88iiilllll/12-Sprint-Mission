@@ -58,11 +58,13 @@ function Items() {
   const [totalCount, setTotalCount] = useState(0);
 
   const [keyword, setKeyword] = useState("");
+
   const handleKeywordSubmit = (e) => {
     e.preventDefault();
     const searchKeyword = e.target["keyword"].value.trim();
-    setKeyword(searchKeyword);
-    handleLoadFull(order, searchKeyword);
+    if (searchKeyword) {
+      setKeyword(searchKeyword);
+    }
   };
 
   const handleLoad = async () => {
@@ -103,6 +105,12 @@ function Items() {
   useEffect(() => {
     handleLoadFull();
   }, [fullPage, order, keyword, fullPageSize]);
+
+  useEffect(() => {
+    if (keyword) {
+      handleLoadFull(order, keyword);
+    }
+  }, [keyword, order]);
 
   return (
     <>
