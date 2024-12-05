@@ -103,6 +103,7 @@ const EditCommentSubmitButton = styled.button`
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
   color: var(--gray-scale-0);
+  cursor: pointer;
 `;
 
 const EditCommentCancelButton = styled.button`
@@ -110,6 +111,7 @@ const EditCommentCancelButton = styled.button`
   color: var(--gray-scale-500);
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
+  cursor: pointer;
 `;
 
 const EmptyComments = styled.div`
