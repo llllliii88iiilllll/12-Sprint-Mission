@@ -1,5 +1,5 @@
-import heartImg from "../assets/ic_heart.svg";
 import styled from "styled-components";
+import heartImg from "../assets/ic_heart.svg";
 import {
   ListWrapUl,
   ItemTxtWrap,
@@ -11,15 +11,7 @@ import {
 } from "../utils/listTxtStyle";
 import { Link } from "react-router-dom";
 
-const TotalListLi = styled.li`
-  width: 221px;
-  @media (max-width: 1199px) {
-    width: 32%;
-  }
-  @media (max-width: 768px) {
-    width: 49%;
-  }
-`;
+const TotalListLi = styled.li``;
 
 const TotalListImg = styled.img`
   display: inline-block;

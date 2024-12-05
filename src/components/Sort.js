@@ -8,6 +8,7 @@ const SortWrap = styled.div`
   display: flex;
   position: relative;
   justify-content: flex-end;
+  cursor: pointer;
 `;
 
 const SortLabelCommon = css`
