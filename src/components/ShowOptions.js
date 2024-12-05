@@ -36,7 +36,7 @@ const ShowOption = styled.li`
   }
 `;
 
-function ShowOptions({ onEdit, item }) {
+function ShowOptions({ handleEditClick, comment }) {
   const [showOptions, setShowOptions] = useState(false);
   const selectRef = useRef(null);
 
@@ -54,20 +54,23 @@ function ShowOptions({ onEdit, item }) {
 
   return (
     <>
-      <ShowOptionsBtn
-        src={keBabImg}
-        onClick={(e) => {
-          setShowOptions(!showOptions);
-        }}
-        ref={selectRef}
-        alt="수정 삭제 버튼"
-      />
-      {showOptions && (
-        <ShowOptionBox>
-          <ShowOption>수정하기</ShowOption>
-          <ShowOption>삭제하기</ShowOption>
-        </ShowOptionBox>
-      )}
+      <div ref={selectRef}>
+        <ShowOptionsBtn
+          src={keBabImg}
+          onClick={(e) => {
+            setShowOptions(!showOptions);
+          }}
+          alt="수정 삭제 버튼"
+        />
+        {showOptions && (
+          <ShowOptionBox>
+            <ShowOption onClick={() => handleEditClick(comment)}>
+              수정하기
+            </ShowOption>
+            <ShowOption>삭제하기</ShowOption>
+          </ShowOptionBox>
+        )}
+      </div>
     </>
   );
 }
