@@ -4,7 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/ko";
+//import "dayjs/locale/ko";
+import ContentWrap from "../components/ContentWrap";
 import profileImg from "../assets/ic_profile.svg";
 import backIcon from "../assets/ic_back.svg";
 import ItemDetail from "../components/ItemDetail";
@@ -220,7 +221,7 @@ function ItemPage() {
   useEffect(() => {}, [value]);
 
   return (
-    <>
+    <ContentWrap>
       <ItemDetailWrap>
         <ItemDetail item={item} formatDate={formatDate} tags={tags} />
         <Line />
@@ -302,7 +303,7 @@ function ItemPage() {
           <BackIconImg src={backIcon} alt="목록으로 돌아가기 아이콘" />
         </MoveListButton>
       </Link>
-    </>
+    </ContentWrap>
   );
 }
 

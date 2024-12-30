@@ -7,9 +7,7 @@ function App() {
   return (
     <>
       <Nav />
-      <ContentWrap>
-        <Outlet />
-      </ContentWrap>
+      <Outlet />
       <Footer />
     </>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getItems } from "../api/api";
 import styled from "styled-components";
+import ContentWrap from "../components/ContentWrap";
 import BestList from "../components/BestList";
 import useWindowSize from "../utils/useWindowSize";
 import TotalList from "../components/TotalList";
@@ -113,7 +114,7 @@ function Items() {
   }, [keyword, order]);
 
   return (
-    <>
+    <ContentWrap>
       <BestList items={items} />
       <article className="total-product">
         <TotalProductTop>
@@ -138,7 +139,7 @@ function Items() {
           totalCount={totalCount}
         />
       </article>
-    </>
+    </ContentWrap>
   );
 }
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
+import ContentWrap from "../components/ContentWrap";
 import FileInput from "../components/FileInput";
 import SectionTitle from "../components/SectionTitle";
 import icClose from "../assets/ic_X.svg";
@@ -157,7 +158,7 @@ function AddItem() {
   useEffect(() => {}, [values, tags]);
 
   return (
-    <>
+    <ContentWrap>
       <AddForm id="submitForm" onSubmit={handleSubmit}>
         <FormTopSection>
           <SectionTitle>상품 등록하기</SectionTitle>
@@ -232,7 +233,7 @@ function AddItem() {
           )}
         </InputWrap>
       </AddForm>
-    </>
+    </ContentWrap>
   );
 }
 
