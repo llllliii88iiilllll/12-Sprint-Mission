@@ -61,13 +61,7 @@ function Nav() {
           <NavLink to="/boards" style={getLinkStyle}>
             자유게시판
           </NavLink>
-          <NavLink
-            to="/items"
-            style={({ isActive }) => ({
-              color: isItemsActive ? "var(--primary-color-100)" : "inherit",
-              fontWeight: isItemsActive ? "var(--font-weight-bold)" : "inherit",
-            })}
-          >
+          <NavLink to="/items" style={getLinkStyle}>
             중고마켓
           </NavLink>
         </SubMenuWrap>
