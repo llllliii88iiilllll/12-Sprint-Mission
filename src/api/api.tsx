@@ -73,6 +73,7 @@ type CommentsList = {
 
 // getItemsComments 함수 반환 타입 정의
 interface Comment {
+  nextCursor?: number;
   list: CommentsList;
 }
 
