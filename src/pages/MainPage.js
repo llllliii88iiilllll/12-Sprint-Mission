@@ -5,9 +5,6 @@ import contentImg2 from "../assets/Img_home_02.svg";
 import contentImg3 from "../assets/Img_home_03.svg";
 import heroBottomImg from "../assets/Img_home_bottom.svg";
 
-const Main = styled.main`
-  margin-top: 70px;
-`;
 const HeroBanner = styled.section`
   height: 540px;
   background-color: #cfe5ff;
@@ -251,7 +248,7 @@ const HeroBottomBanner = styled.section`
 
 function MainPage() {
   return (
-    <Main>
+    <>
       <HeroBanner>
         <div className="wrap">
           <HeroBannerTxt>
@@ -324,7 +321,7 @@ function MainPage() {
           <img src={heroBottomImg} alt="인사하는 판다 두 마리" />
         </div>
       </HeroBottomBanner>
-    </Main>
+    </>
   );
 }
 

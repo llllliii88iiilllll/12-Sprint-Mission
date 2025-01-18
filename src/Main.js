@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./components/App";
 import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
 import ItemListPage from "./pages/ItemListPage";
 import AddItemPage from "./pages/AddItemPage";
 import ItemPage from "./pages/ItemPage";
