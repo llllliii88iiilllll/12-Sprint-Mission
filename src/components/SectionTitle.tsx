@@ -9,6 +9,7 @@ const TxtSectionTitle = styled.p`
   color: var(--gray-scale-900);
 `;
 
+// 타입 설정
 type SectionTitleProps = {
   children: ReactNode;
 };

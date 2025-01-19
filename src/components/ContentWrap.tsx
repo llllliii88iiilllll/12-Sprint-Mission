@@ -12,6 +12,7 @@ const ContentSectionWrap = styled.section`
   }
 `;
 
+// 타입 설정
 type ContentWrapProps = {
   children: ReactNode;
 };

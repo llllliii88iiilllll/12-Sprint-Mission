@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import keBabImg from "../assets/ic_kebab.svg";
 import { Item, CommentsList } from "../api/api";
+import keBabImg from "../assets/ic_kebab.svg";
 
 const ShowOptionsBtn = styled.img`
   position: absolute;
   right: 0;
   cursor: pointer;
 `;
-
 const ShowOptionBox = styled.ul`
   position: absolute;
   z-index: 2;
@@ -24,7 +23,6 @@ const ShowOptionBox = styled.ul`
   text-align: center;
   color: var(--gray-scale-800);
 `;
-
 const ShowOption = styled.li`
   padding: 0 20px;
   cursor: pointer;
@@ -37,6 +35,7 @@ const ShowOption = styled.li`
   }
 `;
 
+// 타입 설정
 interface ShowOptionsProps {
   handleEditClick: (item: CommentsList | Item) => void;
   handleDeleteClick: (item: CommentsList | Item) => void;

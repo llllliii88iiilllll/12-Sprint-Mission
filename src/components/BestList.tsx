@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { Item } from "../api/api";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Item } from "../api/api";
 import {
   BestListWrapUl,
   ItemTxtWrap,
@@ -11,16 +11,14 @@ import {
   FavoriteImg,
   FavoriteCount,
 } from "../utils/listTxtStyle";
+import SectionTitle from "./SectionTitle";
 import heartImg from "../assets/ic_heart.svg";
 import defaultImg from "../assets/img_default.svg";
-import SectionTitle from "./SectionTitle";
 
 const BestListWrap = styled.article`
   margin-bottom: 40px;
 `;
-
 const BestListLi = styled.li``;
-
 const BestListImg = styled.img`
   border-radius: 16px;
   width: 282px;
@@ -31,6 +29,7 @@ const BestListImg = styled.img`
   }
 `;
 
+// 타입 설정
 type BestListProps = {
   items: Item[];
   setPageSize: Dispatch<SetStateAction<number>>;

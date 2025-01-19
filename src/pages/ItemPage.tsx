@@ -1,17 +1,22 @@
-import styled from "styled-components";
-import { getItemsComments, getItemsDetail } from "../api/api";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import styled from "styled-components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import {
+  getItemsComments,
+  getItemsDetail,
+  Item,
+  CommentsList,
+  deleteComment,
+} from "../api/api";
 import ContentWrap from "../components/ContentWrap";
-import profileImg from "../assets/ic_profile.svg";
-import backIcon from "../assets/ic_back.svg";
 import ItemDetail from "../components/ItemDetail";
 import ShowOptions from "../components/ShowOptions";
 import CommentForm from "../components/CommentForm";
+import profileImg from "../assets/ic_profile.svg";
+import backIcon from "../assets/ic_back.svg";
 import EmptyImg from "../assets/Img_inquiry_empty.svg";
-import { Item, CommentsList, deleteComment } from "../api/api";
 
 const ItemDetailWrap = styled.div`
   display: flex;
@@ -19,65 +24,54 @@ const ItemDetailWrap = styled.div`
   gap: 40px;
   margin-bottom: 64px;
 `;
-
 const Line = styled.hr`
   width: 100%;
   height: 1px;
   background-color: var(--gray-scale-200);
   border: none;
 `;
-
 const CommentWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-top: -16px;
 `;
-
 const CommentUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 24px;
   position: relative;
 `;
-
 const CommentLiText = styled.li`
   display: flex;
 `;
-
 const CommentContent = styled.p`
   font-size: 14px;
   font-weight: var(--font-weight-regular);
   color: var(--gray-scale-800);
 `;
-
 const CommentLi = styled.li`
   display: flex;
   gap: 8px;
   position: relative;
   font-size: 12px;
 `;
-
 const CommentWriterDate = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
 `;
-
 const CommentWriter = styled.p`
   color: var(--gray-scale-600);
 `;
-
 const CommentDate = styled.p`
   color: var(--gray-scale-400);
 `;
-
 const ShowEditButtonWrap = styled.div`
   position: absolute;
   right: 0;
 `;
-
 const EditCommentTextArea = styled.textarea`
   width: 100%;
   height: 80px;
@@ -96,7 +90,6 @@ const EditCommentTextArea = styled.textarea`
     height: 130px;
   }
 `;
-
 const EditCommentSubmitButton = styled.button`
   padding: 12px 23px;
   background-color: var(--primary-color-100);
@@ -106,7 +99,6 @@ const EditCommentSubmitButton = styled.button`
   color: var(--gray-scale-0);
   cursor: pointer;
 `;
-
 const EditCommentCancelButton = styled.button`
   padding: 12px 23px;
   color: var(--gray-scale-500);
@@ -114,25 +106,21 @@ const EditCommentCancelButton = styled.button`
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
 `;
-
 const EmptyComments = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 `;
-
 const EmptyCommentsImg = styled.img`
   width: 196px;
   height: 196px;
 `;
-
 const EmptyCommentsText = styled.p`
   font-size: 16px;
   color: var(--gray-scale-400);
   font-weight: var(--font-weight-regular);
 `;
-
 const MoveListButton = styled.button`
   display: flex;
   align-items: center;
@@ -151,7 +139,6 @@ const MoveListButton = styled.button`
     background-color: var(--primary-color-300);
   }
 `;
-
 const BackIconImg = styled.img`
   margin-left: 8px;
 `;
@@ -185,7 +172,6 @@ function ItemPage() {
   function formatDate(dateString: string) {
     return dayjs(dateString).format("YYYY.MM.DD");
   }
-
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
 
@@ -235,7 +221,6 @@ function ItemPage() {
       const commentData = await getItemsComments(numberId);
       setComments(commentData.list);
     }
-
     fetchComments();
   }, [numberId]);
 

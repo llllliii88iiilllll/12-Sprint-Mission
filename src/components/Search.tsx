@@ -7,7 +7,6 @@ const SearchForm = styled.form`
   display: flex;
   gap: 10px;
 `;
-
 const SearchInput = styled.input`
   grid-area: search;
   width: 325px;
@@ -29,6 +28,7 @@ const SearchInput = styled.input`
   }
 `;
 
+// 타입 설정
 type SearchProps = {
   handleKeywordSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };

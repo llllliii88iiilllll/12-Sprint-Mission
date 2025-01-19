@@ -10,7 +10,6 @@ const PaginationBox = styled.div`
   gap: 4px;
   margin-top: 40px;
 `;
-
 const PaginationButton = css`
   display: block;
   width: 40px;
@@ -25,12 +24,10 @@ const PaginationButton = css`
   background-color: var(--gray-scale-0);
   cursor: pointer;
 `;
-
 const PaginationPrevButton = styled.button`
   ${PaginationButton};
   background: url("${IcPrev}") no-repeat center;
 `;
-
 const StyledPaginationButton = styled.button`
   ${PaginationButton};
   &.active {
@@ -39,12 +36,12 @@ const StyledPaginationButton = styled.button`
     font-weight: bold;
   }
 `;
-
 const PaginationNextButton = styled.button`
   ${PaginationButton};
   background: url("${IcNext}") no-repeat center;
 `;
 
+// 타입 설정
 type PaginationProps = {
   page: number;
   pageSize: number;

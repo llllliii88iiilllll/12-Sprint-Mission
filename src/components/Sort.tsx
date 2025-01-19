@@ -1,6 +1,6 @@
-import sortIcon from "../assets/ic_sort.svg";
-import styled, { css } from "styled-components";
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
+import styled, { css } from "styled-components";
+import sortIcon from "../assets/ic_sort.svg";
 import IconDown from "../assets/ic_arrow_down.svg";
 
 const SortWrap = styled.div`
@@ -10,14 +10,12 @@ const SortWrap = styled.div`
   justify-content: flex-end;
   cursor: pointer;
 `;
-
 const SortLabelCommon = css`
   border: 1px solid var(--gray-scale-200);
   border-radius: 12px;
   appearance: none;
   align-content: center;
 `;
-
 const SortLabel = styled.label`
   ${SortLabelCommon}
   width: 130px;
@@ -28,14 +26,12 @@ const SortLabel = styled.label`
   color: var(--gray-scale-800);
   background: url("${IconDown}") no-repeat right 12px center;
 `;
-
 const SortLabelImg = styled.img`
   ${SortLabelCommon}
   width: 42px;
   padding: 9px;
   background-image: none;
 `;
-
 const SortListUl = styled.ul`
   position: absolute;
   right: 0;
@@ -50,7 +46,6 @@ const SortListUl = styled.ul`
   text-align: center;
   color: var(--gray-scale-800);
 `;
-
 const SortListLi = styled.li`
   padding: 0 20px;
   &:first-child {
@@ -62,8 +57,8 @@ const SortListLi = styled.li`
   }
 `;
 
+// 타입 설정
 type SortOrder = "recent" | "favorite";
-
 type SortProps = {
   setOrder: Dispatch<SetStateAction<SortOrder>>;
   width: number;

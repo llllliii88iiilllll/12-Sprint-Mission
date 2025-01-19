@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
+import { Link } from "react-router-dom";
+import { Item } from "../api/api";
 import styled from "styled-components";
-import heartImg from "../assets/ic_heart.svg";
-import defaultImg from "../assets/img_default.svg";
 import {
   ListWrapUl,
   ItemTxtWrap,
@@ -11,11 +11,10 @@ import {
   FavoriteImg,
   FavoriteCount,
 } from "../utils/listTxtStyle";
-import { Link } from "react-router-dom";
-import { Item } from "../api/api";
+import heartImg from "../assets/ic_heart.svg";
+import defaultImg from "../assets/img_default.svg";
 
 const TotalListLi = styled.li``;
-
 const TotalListImg = styled.img`
   display: inline-block;
   height: 221px;
@@ -29,6 +28,7 @@ const TotalListImg = styled.img`
   }
 `;
 
+// 타입 설정
 type TotalListProps = {
   items: Item[];
   page: number;
@@ -36,7 +36,6 @@ type TotalListProps = {
   setPage: Dispatch<SetStateAction<number>>;
   totalCount: number;
 };
-
 type TotalListItemProps = {
   item: Item;
 };

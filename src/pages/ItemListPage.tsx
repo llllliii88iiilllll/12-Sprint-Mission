@@ -2,14 +2,14 @@ import { useState, useEffect, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { getItems, Item } from "../api/api";
 import styled from "styled-components";
-import ContentWrap from "../components/ContentWrap";
-import BestList from "../components/BestList";
 import useWindowSize from "../utils/useWindowSize";
-import TotalList from "../components/TotalList";
+import ContentWrap from "../components/ContentWrap";
 import Sort from "../components/Sort";
-import Pagination from "../components/Pagination";
 import SectionTitle from "../components/SectionTitle";
 import Search from "../components/Search";
+import BestList from "../components/BestList";
+import TotalList from "../components/TotalList";
+import Pagination from "../components/Pagination";
 
 const TotalProductTop = styled.div`
   display: grid;
@@ -24,7 +24,6 @@ const TotalProductTop = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-
 const AddItem = styled.button`
   grid-area: button;
   width: 133px;
@@ -44,6 +43,7 @@ const AddItem = styled.button`
   }
 `;
 
+// type 설정
 type SortOrder = "recent" | "favorite";
 
 function Items() {
@@ -67,14 +67,14 @@ function Items() {
     }
   };
 
-  // 베스트 아이템 로드
+  // 베스트 상품
   const handleLoad = async () => {
     const options = { orderBy: "favorite", pageSize: bestPageSize };
     const { list } = await getItems(options);
     setBestItems(list);
   };
 
-  // 전체 아이템 로드
+  // 전체 상품
   const handleLoadFull = async () => {
     const fullOptions = {
       orderBy: order,
@@ -87,6 +87,7 @@ function Items() {
     setTotalCount(totalCount);
   };
 
+  // 화면 크기에 따른 페이지 당 아이템 개수 설정
   useEffect(() => {
     if (width >= 1200) {
       setPageSize(10);
@@ -100,11 +101,12 @@ function Items() {
     }
   }, [width]);
 
-  // 화면 크기 변경에 따라 로드되는 베스트 아이템 개수 조정
+  // 베스트 상품
   useEffect(() => {
     handleLoad();
   }, [bestPageSize]);
 
+  // 전체 상품
   useEffect(() => {
     handleLoadFull();
   }, [page, order, keyword, pageSize]);
