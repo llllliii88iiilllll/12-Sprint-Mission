@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import styled from "styled-components";
 import IcSearchImg from "../assets/ic_search.svg";
 
@@ -28,8 +29,12 @@ const SearchInput = styled.input`
   }
 `;
 
-function Search({ handleKeywordSubmit }) {
-  const handleSubmit = (e) => {
+type SearchProps = {
+  handleKeywordSubmit: (e: FormEvent<HTMLFormElement>) => void;
+};
+
+function Search({ handleKeywordSubmit }: SearchProps) {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleKeywordSubmit(e);
   };

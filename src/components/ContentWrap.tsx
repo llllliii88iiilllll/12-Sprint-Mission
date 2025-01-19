@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 const ContentSectionWrap = styled.section`
@@ -11,7 +12,11 @@ const ContentSectionWrap = styled.section`
   }
 `;
 
-function ContentWrap({ children }) {
+type ContentWrapProps = {
+  children: ReactNode;
+};
+
+function ContentWrap({ children }: ContentWrapProps) {
   return <ContentSectionWrap>{children}</ContentSectionWrap>;
 }
 

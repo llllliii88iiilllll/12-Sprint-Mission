@@ -44,8 +44,10 @@ const AddItem = styled.button`
   }
 `;
 
+type SortOrder = "recent" | "favorite";
+
 function Items() {
-  const [order, setOrder] = useState("recent");
+  const [order, setOrder] = useState<SortOrder>("recent");
   const [bestItems, setBestItems] = useState<Item[]>([]);
   const [bestPageSize, setBestPageSize] = useState(0);
   const [pageSize, setPageSize] = useState(0);
@@ -61,6 +63,7 @@ function Items() {
     const searchKeyword = (e.target as HTMLFormElement)["keyword"].value.trim();
     if (searchKeyword) {
       setKeyword(searchKeyword);
+      setPage(1);
     }
   };
 

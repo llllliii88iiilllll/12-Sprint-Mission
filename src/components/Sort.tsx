@@ -1,6 +1,6 @@
 import sortIcon from "../assets/ic_sort.svg";
 import styled, { css } from "styled-components";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import IconDown from "../assets/ic_arrow_down.svg";
 
 const SortWrap = styled.div`
@@ -62,21 +62,30 @@ const SortListLi = styled.li`
   }
 `;
 
-function Sort({ setOrder, width }) {
-  const selectRef = useRef(null);
-  const [currentValue, setCurrentValue] = useState("최신순");
+type SortOrder = "recent" | "favorite";
+
+type SortProps = {
+  setOrder: Dispatch<SetStateAction<SortOrder>>;
+  width: number;
+};
+
+function Sort({ setOrder, width }: SortProps) {
+  const selectRef = useRef<HTMLDivElement | null>(null);
+  const [currentValue, setCurrentValue] = useState<"최신순" | "좋아요순">(
+    "최신순"
+  );
   const [showOptions, setShowOptions] = useState(false);
 
-  const handleClickSelectValue = (e) => {
-    const sortValue = e.target.getAttribute("value");
-    const sortName = e.target.getAttribute("name");
-    setCurrentValue(sortName);
+  const handleClickSelectValue = (e: React.MouseEvent<HTMLElement>) => {
+    const sortValue = e.currentTarget.getAttribute("value") as SortOrder;
+    const sortName = e.currentTarget.textContent || "최신순";
+    setCurrentValue(sortName === "최신순" ? "최신순" : "좋아요순");
     setOrder(sortValue);
   };
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (selectRef.current && !selectRef.current.contains(event.target)) {
+    function handleClickOutside(e: MouseEvent) {
+      if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
         setShowOptions(false);
       }
     }
@@ -97,18 +106,10 @@ function Sort({ setOrder, width }) {
       {width < 768 && <SortLabelImg src={sortIcon} alt="정렬하기" />}
       {showOptions && (
         <SortListUl>
-          <SortListLi
-            value="recent"
-            name="최신순"
-            onClick={handleClickSelectValue}
-          >
+          <SortListLi value="recent" onClick={handleClickSelectValue}>
             최신순
           </SortListLi>
-          <SortListLi
-            value="favorite"
-            name="좋아요순"
-            onClick={handleClickSelectValue}
-          >
+          <SortListLi value="favorite" onClick={handleClickSelectValue}>
             좋아요순
           </SortListLi>
         </SortListUl>

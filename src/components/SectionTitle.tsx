@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 const TxtSectionTitle = styled.p`
@@ -8,7 +9,11 @@ const TxtSectionTitle = styled.p`
   color: var(--gray-scale-900);
 `;
 
-function SectionTitle({ children }) {
+type SectionTitleProps = {
+  children: ReactNode;
+};
+
+function SectionTitle({ children }: SectionTitleProps) {
   return <TxtSectionTitle>{children}</TxtSectionTitle>;
 }
 
