@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, ChangeEvent } from "react";
 import styled from "styled-components";
 import icClose from "../assets/ic_X.svg";
 import icPlus from "../assets/ic_plus.svg";
@@ -92,17 +92,23 @@ const ErrorTxt = styled.p`
   color: var(--error);
 `;
 
-function FileInput({ name, value, onChange }) {
-  const [preview, setPreview] = useState();
-  const [error, setError] = useState(null);
-  const inputRef = useRef();
+type FileInputProps = {
+  name: string;
+  value: File | null;
+  onChange: (name: string, value: File | null) => void;
+};
 
-  const handleChange = (e) => {
-    const imgValue = e.target.files[0];
+function FileInput({ name, value, onChange }: FileInputProps) {
+  const [preview, setPreview] = useState<string | undefined>();
+  const [error, setError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const imgValue = e.target.files ? e.target.files[0] : null;
     onChange(name, imgValue);
   };
 
-  const handleDisabledClick = (e) => {
+  const handleDisabledClick = (e: React.MouseEvent<HTMLInputElement>) => {
     if (value) {
       e.preventDefault();
       setError("*이미지 등록은 최대 1개까지 가능합니다.");
@@ -124,7 +130,7 @@ function FileInput({ name, value, onChange }) {
     setPreview(imgPreview);
 
     return () => {
-      setPreview();
+      setPreview(undefined);
       URL.revokeObjectURL(imgPreview);
     };
   }, [value]);
