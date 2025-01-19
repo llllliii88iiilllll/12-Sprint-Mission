@@ -49,8 +49,8 @@ type SortOrder = "recent" | "favorite";
 function Items() {
   const [order, setOrder] = useState<SortOrder>("recent");
   const [bestItems, setBestItems] = useState<Item[]>([]);
-  const [bestPageSize, setBestPageSize] = useState(0);
-  const [pageSize, setPageSize] = useState(0);
+  const [bestPageSize, setBestPageSize] = useState(4);
+  const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
   const [items, setItems] = useState<Item[]>([]);
   const [totalCount, setTotalCount] = useState(0);
