@@ -2,6 +2,8 @@ import styled from "styled-components";
 import heartImg from "../assets/ic_heart.svg";
 import profileImg from "../assets/ic_profile.svg";
 import ShowOptions from "./ShowOptions";
+import { Item } from "../api/api";
+import defaultImg from "../assets/img_default.svg";
 
 const ItemDetailWrap = styled.div`
   display: flex;
@@ -135,10 +137,21 @@ const ItemFavorite = styled.li`
   font-weight: var(--font-weight-medium);
 `;
 
-function ItemDetail({ item = { item }, formatDate, tags }) {
+interface ItemDetailProps {
+  item: Item;
+  formatDate: (dateString: string) => string;
+  tags: string[];
+}
+
+function ItemDetail({ item, formatDate, tags }: ItemDetailProps) {
   return (
     <ItemDetailWrap>
-      <ItemDetailImg src={item.images} alt="상품이미지" />
+      <ItemDetailImg
+        src={
+          item.images && item.images.length > 0 ? item.images[0] : defaultImg
+        }
+        alt="상품이미지"
+      />
       <ItemDetailText>
         <ItemNamePrice>
           <ItemName>

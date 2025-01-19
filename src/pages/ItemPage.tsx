@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { getItemsComments, getItemsDetail, createComment } from "../api/api";
+import { getItemsComments, getItemsDetail } from "../api/api";
 import { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-//import "dayjs/locale/ko";
 import ContentWrap from "../components/ContentWrap";
 import profileImg from "../assets/ic_profile.svg";
 import backIcon from "../assets/ic_back.svg";
@@ -12,6 +11,7 @@ import ItemDetail from "../components/ItemDetail";
 import ShowOptions from "../components/ShowOptions";
 import CommentForm from "../components/CommentForm";
 import EmptyImg from "../assets/Img_inquiry_empty.svg";
+import { Item, CommentData, CommentsList } from "../api/api";
 
 const ItemDetailWrap = styled.div`
   display: flex;
@@ -157,36 +157,39 @@ const BackIconImg = styled.img`
 `;
 
 function ItemPage() {
-  const { id } = useParams();
-  const [item, setItem] = useState({
+  const { id } = useParams<{ id: string }>();
+  const numberId = id ? Number(id) : 0;
+  const [item, setItem] = useState<Item>({
     tags: [],
-    images: "",
+    images: [],
     name: "",
-    price: "",
+    price: 0,
     description: "",
-    ownerId: "",
+    ownerId: 0,
     createdAt: "",
     favoriteCount: 0,
+    id: 0,
+    ownerNickname: "",
   });
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<CommentsList[]>([]);
   const [value, setValue] = useState("");
-  const [editCommentId, setEditCommentId] = useState(null);
+  const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
 
-  const isValid = (value) => {
+  const isValid = (value: string) => {
     return value && value.trim().length > 0;
   };
 
   const tags = item.tags;
 
-  function formatDate(dateString) {
+  function formatDate(dateString: string) {
     return dayjs(dateString).format("YYYY.MM.DD");
   }
 
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
 
-  function formatRelativeTime(dateString) {
+  function formatRelativeTime(dateString: string) {
     const date = dayjs(dateString);
     return date.fromNow();
   }
@@ -203,7 +206,7 @@ function ItemPage() {
 
   useEffect(() => {
     async function fetchItem() {
-      const data = await getItemsDetail(id);
+      const data = await getItemsDetail(numberId);
       setItem(data);
     }
     fetchItem();
@@ -211,12 +214,12 @@ function ItemPage() {
 
   useEffect(() => {
     async function fetchComments() {
-      const commentData = await getItemsComments(id);
-      setComments(commentData.list || []);
+      const commentData = await getItemsComments(numberId);
+      setComments(commentData.list);
     }
 
     fetchComments();
-  }, [id]);
+  }, [numberId]);
 
   useEffect(() => {}, [value]);
 
@@ -239,7 +242,6 @@ function ItemPage() {
                       }}
                     >
                       <EditCommentTextArea
-                        type="text"
                         value={editValue}
                         onChange={(e) => setEditValue(e.target.value)}
                       />

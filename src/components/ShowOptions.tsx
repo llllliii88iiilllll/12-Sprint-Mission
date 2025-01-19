@@ -36,13 +36,18 @@ const ShowOption = styled.li`
   }
 `;
 
-function ShowOptions({ handleEditClick, comment }) {
+interface ShowOptionsProps {
+  handleEditClick: (comment: Comment) => void;
+  comment: Comment;
+}
+
+function ShowOptions({ handleEditClick, comment }: ShowOptionsProps) {
   const [showOptions, setShowOptions] = useState(false);
-  const selectRef = useRef(null);
+  const selectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (selectRef.current && !selectRef.current.contains(event.target)) {
+    function handleClickOutside(e: MouseEvent) {
+      if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
         setShowOptions(false);
       }
     }

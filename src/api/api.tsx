@@ -63,7 +63,7 @@ type Writer = {
 };
 
 // CommentsList 타입 정의
-type CommentsList = {
+export type CommentsList = {
   writer: Writer;
   updatedAt: string;
   createdAt: string;
@@ -72,12 +72,12 @@ type CommentsList = {
 };
 
 // getItemsComments 함수 반환 타입 정의
-type Comment = {
+export type CommentData = {
   nextCursor?: number;
-  list: CommentsList;
+  list: CommentsList[];
 };
 
-export async function getItemsComments(id: number): Promise<Comment[]> {
+export async function getItemsComments(id: number): Promise<CommentData> {
   const response = await fetch(`${BASE_URL}/${id}/comments?limit=100`);
   if (!response.ok) {
     throw new Error("댓글을 불러오는데 실패했습니다.");

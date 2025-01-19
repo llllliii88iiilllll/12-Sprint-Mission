@@ -44,7 +44,19 @@ const CommentSubmitButton = styled.button`
   cursor: pointer;
 `;
 
-function CommentForm({ handleSubmit, value, setValue, isValid }) {
+interface CommentFormProps {
+  handleSubmit: (e: React.FormEvent) => void;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  isValid: (value: string) => boolean;
+}
+
+function CommentForm({
+  handleSubmit,
+  value,
+  setValue,
+  isValid,
+}: CommentFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       <CommentLabel htmlFor="questionSubmit">문의하기</CommentLabel>
