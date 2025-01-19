@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import keBabImg from "../assets/ic_kebab.svg";
+import { Item, CommentsList } from "../api/api";
 
 const ShowOptionsBtn = styled.img`
   position: absolute;
@@ -37,11 +38,16 @@ const ShowOption = styled.li`
 `;
 
 interface ShowOptionsProps {
-  handleEditClick: (comment: Comment) => void;
-  comment: Comment;
+  handleEditClick: (item: CommentsList | Item) => void;
+  handleDeleteClick: (item: CommentsList | Item) => void;
+  item: CommentsList | Item;
 }
 
-function ShowOptions({ handleEditClick, comment }: ShowOptionsProps) {
+function ShowOptions({
+  handleEditClick,
+  handleDeleteClick,
+  item,
+}: ShowOptionsProps) {
   const [showOptions, setShowOptions] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -69,10 +75,12 @@ function ShowOptions({ handleEditClick, comment }: ShowOptionsProps) {
         />
         {showOptions && (
           <ShowOptionBox>
-            <ShowOption onClick={() => handleEditClick(comment)}>
+            <ShowOption onClick={() => handleEditClick(item)}>
               수정하기
             </ShowOption>
-            <ShowOption>삭제하기</ShowOption>
+            <ShowOption onClick={() => handleDeleteClick(item)}>
+              삭제하기
+            </ShowOption>
           </ShowOptionBox>
         )}
       </div>

@@ -109,3 +109,13 @@ export async function addItem(itemData: {
   const data = await response.json();
   return data;
 }
+
+export async function deleteComment(commentId: number): Promise<void> {
+  const response = await fetch(`${BASE_URL}/comments/${commentId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("댓글 삭제에 실패했습니다.");
+  }
+}

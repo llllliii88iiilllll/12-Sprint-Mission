@@ -2,8 +2,9 @@ import styled from "styled-components";
 import heartImg from "../assets/ic_heart.svg";
 import profileImg from "../assets/ic_profile.svg";
 import ShowOptions from "./ShowOptions";
-import { Item } from "../api/api";
+import { Item, CommentsList } from "../api/api";
 import defaultImg from "../assets/img_default.svg";
+import { useNavigate } from "react-router-dom";
 
 const ItemDetailWrap = styled.div`
   display: flex;
@@ -144,6 +145,9 @@ interface ItemDetailProps {
 }
 
 function ItemDetail({ item, formatDate, tags }: ItemDetailProps) {
+  const navigate = useNavigate;
+  const handleItemEdit = (item: Item | CommentsList) => {};
+  const handleItemDelete = (item: Item | CommentsList) => {};
   return (
     <ItemDetailWrap>
       <ItemDetailImg
@@ -156,7 +160,11 @@ function ItemDetail({ item, formatDate, tags }: ItemDetailProps) {
         <ItemNamePrice>
           <ItemName>
             {item.name}
-            <ShowOptions />
+            <ShowOptions
+              handleEditClick={handleItemEdit}
+              handleDeleteClick={handleItemDelete}
+              item={item}
+            />
           </ItemName>
           <ItemPrice>{item.price}</ItemPrice>
           <Line />

@@ -11,7 +11,7 @@ import ItemDetail from "../components/ItemDetail";
 import ShowOptions from "../components/ShowOptions";
 import CommentForm from "../components/CommentForm";
 import EmptyImg from "../assets/Img_inquiry_empty.svg";
-import { Item, CommentData, CommentsList } from "../api/api";
+import { Item, CommentsList, deleteComment } from "../api/api";
 
 const ItemDetailWrap = styled.div`
   display: flex;
@@ -176,8 +176,8 @@ function ItemPage() {
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
 
-  const isValid = (value: string) => {
-    return value && value.trim().length > 0;
+  const isValid = (value: string): boolean => {
+    return !!(value && value.trim().length > 0);
   };
 
   const tags = item.tags;
@@ -194,14 +194,32 @@ function ItemPage() {
     return date.fromNow();
   }
 
-  const handleEditClick = (comment) => {
-    setEditCommentId(comment.id);
-    setEditValue(comment.content);
-  };
-
   const handleCancelEdit = () => {
     setEditCommentId(null);
     setEditValue("");
+  };
+
+  const handleCommentEdit = (item: Item | CommentsList) => {
+    if ("content" in item) {
+      setEditCommentId(item.id);
+      setEditValue(item.content);
+    }
+  };
+  const handleCommentDelete = async (item: Item | CommentsList) => {
+    if ("id" in item) {
+      try {
+        await deleteComment(item.id);
+        setComments((prevComments) =>
+          prevComments.filter((comment) => comment.id !== item.id)
+        );
+      } catch (error) {
+        console.error("댓글 삭제 중 오류 발생:", error);
+      }
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -228,7 +246,12 @@ function ItemPage() {
       <ItemDetailWrap>
         <ItemDetail item={item} formatDate={formatDate} tags={tags} />
         <Line />
-        <CommentForm value={value} isValid={isValid} setValue={setValue} />
+        <CommentForm
+          handleSubmit={handleSubmit}
+          value={value}
+          isValid={isValid}
+          setValue={setValue}
+        />
         <CommentWrap>
           {comments.length > 0 ? (
             comments.map((comment) => (
@@ -273,8 +296,9 @@ function ItemPage() {
                     <CommentLiText>
                       <CommentContent>{comment.content}</CommentContent>
                       <ShowOptions
-                        handleEditClick={handleEditClick}
-                        comment={comment}
+                        handleEditClick={handleCommentEdit}
+                        handleDeleteClick={handleCommentDelete}
+                        item={comment}
                       />
                     </CommentLiText>
                     <CommentLi>
