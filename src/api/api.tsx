@@ -85,3 +85,27 @@ export async function getItemsComments(id: number): Promise<Comment[]> {
   const body = await response.json();
   return body;
 }
+
+export async function addItem(itemData: {
+  images: string[];
+  tags: string[];
+  price: number;
+  description: string;
+  name: string;
+}) {
+  const response = await fetch(BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(itemData),
+  });
+
+  if (!response.ok) {
+    // 요청 실패 시 에러 처리
+    throw new Error("상품 추가에 실패했습니다.");
+  }
+
+  const data = await response.json();
+  return data;
+}

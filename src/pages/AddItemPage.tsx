@@ -4,6 +4,7 @@ import ContentWrap from "../components/ContentWrap";
 import FileInput from "../components/FileInput";
 import SectionTitle from "../components/SectionTitle";
 import icClose from "../assets/ic_X.svg";
+import { addItem } from "api/api";
 
 const AddForm = styled.form`
   display: flex;
@@ -88,37 +89,59 @@ const RemoveTagButton = styled.button`
   cursor: pointer;
 `;
 
+type FormValues = {
+  imgFile: File | null;
+  title: string;
+  content: string;
+  price: number;
+  tag: string;
+};
+
 function AddItem() {
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<FormValues>({
     imgFile: null,
     title: "",
     content: "",
-    price: "",
+    price: 0,
     tag: "",
   });
 
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState<string[]>([]);
   const [isComposing, setIsComposing] = useState(false);
 
-  const handleChange = (name, value) => {
+  const handleChange = (name: string, value: string | File | null) => {
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     handleChange(name, value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = { ...values, tags };
-    console.log("폼 제출 데이터:", formData);
+    const imageUrl = values.imgFile ? URL.createObjectURL(values.imgFile) : "";
+    const formData = {
+      images: imageUrl ? [imageUrl] : [],
+      tags: tags,
+      price: values.price,
+      description: values.content,
+      name: values.title,
+    };
+    try {
+      const result = await addItem(formData);
+      console.log("상품이 성공적으로 추가되었습니다:", result);
+    } catch (error) {
+      console.error("상품 추가 실패:", error);
+    }
   };
 
-  const handleTagKeyDown = (e) => {
+  const handleTagKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !isComposing) {
       e.preventDefault();
 
@@ -142,11 +165,11 @@ function AddItem() {
     setIsComposing(false);
   };
 
-  const handleRemoveTag = (index) => {
+  const handleRemoveTag = (index: number) => {
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
-  const isValid = (values, tags) => {
+  const isValid = (values: FormValues, tags: string[]): boolean => {
     return (
       values.title.trim() !== "" &&
       values.content.trim() !== "" &&
