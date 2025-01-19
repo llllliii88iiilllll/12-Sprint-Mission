@@ -1,7 +1,7 @@
 const BASE_URL = "https://panda-market-api.vercel.app/products";
 
 //Item 타입 정의
-interface Item {
+export type Item = {
   id: number;
   name: string;
   price: number;
@@ -12,7 +12,7 @@ interface Item {
   ownerNickname: string;
   favoriteCount: number;
   createdAt: string;
-}
+};
 
 // getItems 타입 설정
 type GetItemsParams = {
@@ -72,10 +72,10 @@ type CommentsList = {
 };
 
 // getItemsComments 함수 반환 타입 정의
-interface Comment {
+type Comment = {
   nextCursor?: number;
   list: CommentsList;
-}
+};
 
 export async function getItemsComments(id: number): Promise<Comment[]> {
   const response = await fetch(`${BASE_URL}/${id}/comments?limit=100`);

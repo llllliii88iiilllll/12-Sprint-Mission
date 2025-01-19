@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import styled, { css } from "styled-components";
 import IcPrev from "../assets/arrow_left.svg";
 import IcNext from "../assets/arrow_right.svg";
@@ -44,11 +45,18 @@ const PaginationNextButton = styled.button`
   background: url("${IcNext}") no-repeat center;
 `;
 
-function Pagination({ fullPage, fullPageSize, setFullPage, totalCount }) {
+type PaginationProps = {
+  page: number;
+  pageSize: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  totalCount: number;
+};
+
+function Pagination({ page, pageSize, setPage, totalCount }: PaginationProps) {
   const btnRange = 5;
-  const currentSet = Math.ceil(fullPage / btnRange);
+  const currentSet = Math.ceil(page / btnRange);
   const startPage = (currentSet - 1) * btnRange + 1;
-  const totalPage = Math.ceil(totalCount / fullPageSize);
+  const totalPage = Math.ceil(totalCount / pageSize);
   const endPage = Math.min(startPage + btnRange - 1, totalPage);
 
   return (
@@ -56,14 +64,14 @@ function Pagination({ fullPage, fullPageSize, setFullPage, totalCount }) {
       {currentSet > 1 && (
         <PaginationPrevButton
           className="btn-prev"
-          onClick={() => setFullPage(startPage - 1)}
+          onClick={() => setPage(startPage - 1)}
         />
       )}
       {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
         <StyledPaginationButton
           key={i}
-          onClick={() => setFullPage(startPage + i)}
-          className={fullPage === startPage + i ? "active" : ""}
+          onClick={() => setPage(startPage + i)}
+          className={page === startPage + i ? "active" : ""}
         >
           {startPage + i}
         </StyledPaginationButton>
@@ -71,7 +79,7 @@ function Pagination({ fullPage, fullPageSize, setFullPage, totalCount }) {
       {currentSet < Math.ceil(totalPage / btnRange) && (
         <PaginationNextButton
           className="btn-next"
-          onClick={() => setFullPage(endPage + 1)}
+          onClick={() => setPage(endPage + 1)}
         />
       )}
     </PaginationBox>
